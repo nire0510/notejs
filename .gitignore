@@ -5,3 +5,4 @@ storage
 safe
 .DS_Store
 .idea
+Gruntfile.js

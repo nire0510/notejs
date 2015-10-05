@@ -133,7 +133,7 @@ module.exports = {
       }
       else {
         if (Array.isArray(data.data)) {
-          console.log('User %s has %d notes:', args[1], data.data.length);
+          console.log('User %s has %d notes', args[1], data.data.length);
 
           // User's notes:
           data.data.forEach(function (item) {
