@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* global require */
 
 var colors = require('colors');

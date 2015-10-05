@@ -2,10 +2,10 @@
   "name": "notejs",
   "version": "1.0.0",
   "description": "Command line tool for notes sharing",
-  "main": "./bin/webquery.js",
+  "main": "./bin/note.js",
   "preferGlobal": true,
   "bin": {
-    "webquery": "./bin/webquery.js"
+    "note": "./bin/note.js"
   },
   "engines": {
     "node": ">=0.12.0"
