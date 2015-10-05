@@ -1,0 +1,35 @@
+{
+  "name": "notejs",
+  "version": "1.0.0",
+  "description": "Command line tool for notes sharing",
+  "main": "./bin/webquery.js",
+  "preferGlobal": true,
+  "bin": {
+    "webquery": "./bin/webquery.js"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "node-localstorage": "^0.6.0",
+    "restler": "^3.4.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-ftp-deploy": "^0.1.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "terminal",
+    "cmd",
+    "commandline",
+    "snippets",
+    "notes",
+    "share"
+  ],
+  "author": "Nir Elbaz <nire0510@gmail.com> (http://nirelbaz.com/)",
+  "license": "None"
+}

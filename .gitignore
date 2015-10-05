@@ -1,0 +1,7 @@
+api
+node_modules
+storage
+.ftppass
+safe
+.DS_Store
+.idea
