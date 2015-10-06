@@ -153,7 +153,7 @@ module.exports = {
     "method": "post",
     "request": {
       "data": {
-        "content": args[2]
+        "content": args.slice(2).join(' ')
       },
       "headers": {
         "Content-Type": "application/json",
@@ -163,7 +163,7 @@ module.exports = {
     "usage": "note add NOTE CONTENT",
     "example": "note add sample this is a test",
     "validation": {
-      "pattern": "^add (\\w{2,20})(.{2,200})$",
+      "pattern": "^add (\\w{2,20}) (.{2,200})$",
       "errors": {
         1: dictionary.NOTE2_VALIDATION,
         2: dictionary.CONTENT_VALIDATION
@@ -180,11 +180,11 @@ module.exports = {
   },
   "add-private": {
     "description": dictionary.ADD_PRIVATE_DESCRIPTION,
-    "url": "/add/private/" + args[1],
+    "url": "/note/private/" + args[1],
     "method": "post",
     "request": {
       "data": {
-        "content": args[2]
+        "content": args.slice(2).join(' ')
       },
       "headers": {
         "Content-Type": "application/json",
@@ -194,7 +194,7 @@ module.exports = {
     "usage": "note add-private NOTE CONTENT",
     "example": "note add-private sample this is a test",
     "validation": {
-      "pattern": "^add-private (\\w{2,20})(.{2,200})$",
+      "pattern": "^add-private (\\w{2,20}) (.{2,200})$",
       "errors": {
         1: dictionary.NOTE2_VALIDATION,
         2: dictionary.CONTENT_VALIDATION
