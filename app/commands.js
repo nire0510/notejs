@@ -94,7 +94,7 @@ module.exports = {
     "usage": "note register USERNAME PASSWORD",
     "example": "note register notejs qweASD123",
     "validation": {
-      "pattern": "^register (\\w{4,20}) (\\w{4,20})$",
+      "pattern": "^register (\\w{4,20}) ([.\\S]{4,20})$",
       "errors": {
         1: dictionary.USERNAME_VALIDATION,
         2: dictionary.PASSWORD_VALIDATION
@@ -102,16 +102,13 @@ module.exports = {
     },
     "callback": function (data, response) {
       if (data.error !== 0) {
-        console.error(dictionary[data.message].red);
+        console.error(dictionary[data.message].red, args[1].bold);
       }
       else {
         if (response.headers['set-cookie']) {
-          console.log(dictionary[data.message].green, args[1]);
           localStorage.getStorage().setItem('PHPSESSID', (response.headers['set-cookie'][response.headers['set-cookie'].length - 1]).split(';')[0]);
         }
-        else {
-          console.log(dictionary.USER_ALREADY_LOGGED_IN.green, args[1].bold);
-        }
+        console.log(dictionary[data.message].green, args[1].bold);
       }
     }
   },
@@ -134,7 +131,7 @@ module.exports = {
       }
       else {
         if (Array.isArray(data.data)) {
-          console.log('User %s has %d notes', args[1], data.data.length);
+          console.log('User %s has %d notes', args[1].bold, data.data.length);
 
           // User's notes:
           data.data.forEach(function (item) {

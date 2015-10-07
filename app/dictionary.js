@@ -28,5 +28,5 @@ module.exports = {
   "PASSWORD_VALIDATION": "PASSWORD is required and should contain 4-20 alphanumeric/special characters",
   "NOTE_VALIDATION": "NOTE is optional but if appears - should contain 2-20 alphanumeric characters",
   "NOTE2_VALIDATION": "NOTE is required and should contain at 2-20 alphanumeric characters",
-  "CONTENT_VALIDATION": "CONTENT is required and should contain 2-200 alphanumeric/special characters"
+  "CONTENT_VALIDATION": "CONTENT is required and should contain 2-200 alphanumeric & special characters"
 };

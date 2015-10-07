@@ -1,7 +1,7 @@
 # note.js
-**Command line tool for notes sharing**  
+**Command line tool for note-taking & sharing**  
 
-**note.js** is a node.js based tool which helps you share notes between your computers and even colleagues right from your terminal! 
+**note.js** is a node.js based tool which helps you to take and share notes between your computers and even colleagues right from your terminal! 
 You short text snippets will be saved online so you can access them anywhere you want.
 
 ## Installation
@@ -10,7 +10,7 @@ You short text snippets will be saved online so you can access them anywhere you
 ## How to use
 ### Placeholders
 * `USERNAME`: 4-20 alphanumeric characters (no spaces) - Your personal or your colleague's **note.js** username.
-* `PASSWORD`: 4-20 alphanumeric characters (no spaces) - Your **note.js** password.
+* `PASSWORD`: 4-20 alphanumeric & special characters (no spaces) - Your **note.js** password.
 * `NOTE`: 2-20 alphanumeric characters (no spaces) - Note's name, also serves as its unique ID.
 * `CONTENT`: 2-200 characters - Note's content.
 
