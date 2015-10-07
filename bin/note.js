@@ -13,13 +13,17 @@ var objCommand;
 if (args.length === 0 || args[0] === 'help' || args[0] === '-h' || args[0] === '--help') {
   console.log('***************************************'.blue);
   console.log('***              NOTE.JS            ***'.cyan.bold);
-  console.log('* Command line tool for notes sharing *');
+  console.log('* command line tool for notes sharing *');
   console.log('***************************************'.blue);
+  console.log('');
+  console.log('npm install -g notejs'.green);
+  console.log('');
+  console.log('%s %s', 'note.js'.bold.white, 'is a node.js based tool which helps you share notes between your computers and even colleagues! You short text snippets are saved online so you can access them anywhere.'.white);
   console.log('');
 
   for (var command in commands) {
     if (commands.hasOwnProperty(command)) {
-      console.log('* %s - %s', command.white.bold, commands[command].description.white);
+      console.log('> %s - %s', command.white.bold, commands[command].description.white);
       console.log('  %s', commands[command].usage);
 
       if (commands[command].validation && commands[command].validation.errors) {

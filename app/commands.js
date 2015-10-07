@@ -24,7 +24,8 @@ module.exports = {
     "usage": "note login USERNAME PASSWORD",
     "example": "note login notejs qweASD123",
     "validation": {
-      "pattern": "^login (\\w{4,20}) (\\w{4,20})$",
+      //"pattern": "^login (\\w{4,20}) ([\\w\\.\\\\\+\\*\\?\\[\\^\\]\\$\\(\\)\\{\\}\\=\\!\\<\\>\\|\\:\\-@#%&_;'\"]{4,20})$",
+      "pattern": "^login (\\w{4,20}) ([.\\S]{4,20})$",
       "errors": {
         1: dictionary.USERNAME_VALIDATION,
         2: dictionary.PASSWORD_VALIDATION
@@ -137,12 +138,12 @@ module.exports = {
 
           // User's notes:
           data.data.forEach(function (item) {
-            console.log('* %s\t\t%s', item.note.white.bold, item.content);
+            console.log('* %s%s%s', item.note.white.bold, '                         '.substr(item.note.length), item.content);
           });
         }
         else if (data.data && data.data.hasOwnProperty('note')) {
           // A note:
-          console.log('* %s\t\t%s', data.data.note.white.bold, data.data.content);
+          console.log('* %s\t%s', data.data.note.white.bold, data.data.content);
         }
       }
     }

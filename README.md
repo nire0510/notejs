@@ -41,4 +41,4 @@ You short text snippets will be saved online so you can access them anywhere you
 `note logout`
 
 ## Limitations
-* Currently there are no limits on the number of notes one can create, but it may change in the future
+* Currently, each user is allowed to create up to 100 notes (it may change in the near future)
