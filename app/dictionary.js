@@ -8,6 +8,8 @@ module.exports = {
   "LOGIN_FAIL": "User %s failed to login",
   "USERNAME_EXISTS": "User %s already exists",
   "USERNAME_NOT_LOGGEDIN": "You are not logged in yet",
+  "EMAIL_FAIL_SEND_ERROR": "Note could not be sent",
+  "EMAIL_FAIL_NO_NOTE": "Note %s could not be found",
 
   "LOGIN_DESCRIPTION": "Login to add and delete notes",
   "LOGOUT_DESCRIPTION": "Logout current user",
@@ -19,6 +21,7 @@ module.exports = {
   "ADD_PRIVATE_DESCRIPTION": "Add a private note (visible only to users who have note's name)",
   "DELETE_DESCRIPTION": "Delete existing note",
   "DELETE_ALL_DESCRIPTION": "Delete all your notes",
+  "EMAIL_DESCRIPTION": "Email a note",
 
   "LOGIN_SUCCESS": "User %s logged in successfully!",
   "LOGOUT_SUCCESS": "User logged out successfully!",
@@ -31,8 +34,10 @@ module.exports = {
   "NOTES_DELETED": "All notes deleted successfully",
   "USER_HAS_X_NOTES": "User %s has %d note(s)",
   "CURRENT_USERNAME": "You are currently logged in with user %s",
+  "EMAIL_SUCCESS": "Note %s sent to %s",
 
   "USERNAME_VALIDATION": "USERNAME is required and should contain 4-20 alphanumeric characters",
+  "EMAIL_VALIDATION": "EMAIL is required and should contain a valid email address",
   "PASSWORD_VALIDATION": "PASSWORD is required and should contain 4-20 characters (no spaces)",
   "NOTE_VALIDATION": "NOTE is optional but if appears - should contain 2-20 alphanumeric characters",
   "NOTE2_VALIDATION": "NOTE is required and should contain at 2-20 alphanumeric characters",

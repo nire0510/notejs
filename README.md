@@ -27,26 +27,29 @@ You short text snippets will be saved online so you can access them anywhere you
 4. Alternatively, you can open specific note if you know its name:  
 `note get USERNAME NOTE`
 
-5. If you want to create a note which won't be seen when other users run the command in step #3, you can create 
+5. You can even email a note!  
+`note email USERNAME NOTE EMAIL`
+
+6. If you want to create a note which won't be seen when other users run the command in step #3, you can create 
  a somewhat "private" note, which will be seen only for users who know the note's name:  
 `note add-private NOTE CONTENT`
 
-6. To delete an existing note:  
+7. To delete an existing note:  
 `note delete NOTE`
 
-7. If your repository is a mess and you want to delete all your notes:  
+8. If your repository is a mess and you want to delete all your notes:  
 `note delete-all`
 
-8. In any case your session expires, you have to login in order to be able to use all features:  
+9. In any case your session expires, you have to login in order to be able to use all features:  
 `note login USERNAME PASSWORD`
 
-9. Forgot with which user you are logged in?  
+10. Forgot with which user you are logged in?  
 `note me`
 
-10. Working on a public computer? make sure you logout after finish working:  
+11. Working on a public computer? make sure you logout after finish working:  
 `note logout`
 
-11. When you think it's time to say goodbye, run this command to delete all your notes and username  
+12. When you think it's time to say goodbye, run this command to delete all your notes and username  
 `note unregister`
 
 ## Limitations

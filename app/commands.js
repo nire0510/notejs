@@ -38,7 +38,7 @@ module.exports = {
         if (response.headers['set-cookie']) {
           localStorage.getStorage().setItem('PHPSESSID', (response.headers['set-cookie'][response.headers['set-cookie'].length - 1]).split(';')[0]);
         }
-         console.log(dictionary[data.message].green, args[1].bold);
+         console.log(dictionary.REGISTER_SUCCESS.green, args[1].bold);
       }
     }
   },
@@ -65,7 +65,7 @@ module.exports = {
          data.message && dictionary[data.message] ? console.error(dictionary[data.message].red) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
-         console.log(dictionary[data.message].green, data.data.username.bold);
+         console.log(dictionary.UNREGISTER_SUCCESS.green, data.data.username.bold);
       }
     }
   },
@@ -99,12 +99,9 @@ module.exports = {
       }
       else {
         if (response.headers['set-cookie']) {
-           console.log(dictionary[data.message].green, args[1].bold);
           localStorage.getStorage().setItem('PHPSESSID', (response.headers['set-cookie'][response.headers['set-cookie'].length - 1]).split(';')[0]);
         }
-        else {
-          console.log(dictionary.LOGIN_SUCCESS.green, args[1].bold);
-        }
+        console.log(dictionary.LOGIN_SUCCESS.green, args[1].bold);
       }
     }
   },
@@ -134,7 +131,7 @@ module.exports = {
         fs.unlink('./storage/PHPSESSID', function (err) {
           if (err) throw err;
 
-           console.log(dictionary[data.message].green);
+           console.log(dictionary.LOGOUT_SUCCESS.green);
         });
       }
     }
@@ -160,7 +157,7 @@ module.exports = {
          data.message && dictionary[data.message] ? console.error(dictionary[data.message]) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
-         console.log(dictionary[data.message].green, data.data.username.bold);
+         console.log(dictionary.CURRENT_USERNAME.green, data.data.username.bold);
       }
     }
   },
@@ -179,7 +176,7 @@ module.exports = {
     },
     "callback": function (data) {
       if (data.error !== 0) {
-        console.error(dictionary.ERROR_OCCURRED.red, data.message);
+        data.message && dictionary[data.message] ? console.error(dictionary[data.message]) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
         if (Array.isArray(data.data)) {
@@ -194,6 +191,37 @@ module.exports = {
           // A note:
           console.log('* %s\t%s', data.data.note.white.bold, data.data.content);
         }
+      }
+    }
+  },
+  "email": {
+    "description": dictionary.EMAIL_DESCRIPTION,
+    "url": "/note/email/" + args[1] + "/" + args[2] + "",
+    "method": "post",
+    "request": {
+      "data": {
+        "email": args[3]
+      },
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "usage": "note email USERNAME NOTE EMAIL",
+    "example": "note email notejs notejs website myemail@somedomain.com",
+    "validation": {
+      "pattern": "^email (\\w{4,20})\\s+(\\w{2,20})\\s+(\\S+@\\S+)$",
+      "errors": {
+        1: dictionary.USERNAME_VALIDATION,
+        2: dictionary.NOTE_VALIDATION,
+        3: dictionary.EMAIL_VALIDATION
+      }
+    },
+    "callback": function (data) {
+      if (data.error !== 0) {
+        data.message && dictionary[data.message] ? console.error(dictionary[data.message]) : console.error(dictionary.ERROR_OCCURRED.red, data.message, args[1], args[2], args[3]);
+      }
+      else {
+        console.log(dictionary.EMAIL_SUCCESS.green, args[2].bold, args[3].bold);
       }
     }
   },
@@ -221,7 +249,7 @@ module.exports = {
     },
     "callback": function (data) {
       if (data.error !== 0) {
-        console.error(dictionary.ERROR_OCCURRED.red, data.message);
+        data.message && dictionary[data.message] ? console.error(dictionary[data.message]) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
          console.log(dictionary[data.message].green, args[1].bold);
@@ -252,7 +280,7 @@ module.exports = {
     },
     "callback": function (data) {
       if (data.error !== 0) {
-        console.error(dictionary.ERROR_OCCURRED.red, data.message);
+        data.message && dictionary[data.message] ? console.error(dictionary[data.message]) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
          console.log(dictionary[data.message].green, args[1].bold);
@@ -279,10 +307,10 @@ module.exports = {
     },
     "callback": function (data) {
       if (data.error !== 0) {
-        console.error(dictionary.ERROR_OCCURRED.red, data.message);
+        data.message && dictionary[data.message] ? console.error(dictionary[data.message]) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
-         console.log(dictionary[data.message].green, args[1].bold);
+         console.log(dictionary.NOTE_DELETED.green, args[1].bold);
       }
     }
   },
@@ -305,10 +333,10 @@ module.exports = {
     "confirm": dictionary.CONFIRM_DELETE_ALL,
     "callback": function (data) {
       if (data.error !== 0) {
-        console.error(dictionary.ERROR_OCCURRED.red, data.message);
+        data.message && dictionary[data.message] ? console.error(dictionary[data.message]) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
-         console.log(dictionary[data.message].green);
+         console.log(dictionary.NOTES_DELETED.green);
       }
     }
   }
