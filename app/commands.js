@@ -7,6 +7,68 @@ var dictionary = require('../app/dictionary');
 var args = process.argv.slice(2);
 
 module.exports = {
+  "register": {
+    "description": dictionary.REGISTER_DESCRIPTION,
+    "url": "/user/register",
+    "request": {
+      "data": {
+        "username": args[1],
+        "password": args[2]
+      },
+      "headers": {
+        "Content-Type": "application/json",
+        "Cookie": localStorage.getStorage().getItem('PHPSESSID')
+      }
+    },
+    "method": "post",
+    "usage": "note register USERNAME PASSWORD",
+    "example": "note register notejs qweASD123",
+    "validation": {
+      "pattern": "^register (\\w{4,20}) ([.\\S]{4,20})$",
+      "errors": {
+        1: dictionary.USERNAME_VALIDATION,
+        2: dictionary.PASSWORD_VALIDATION
+      }
+    },
+    "callback": function (data, response) {
+      if (data.error !== 0) {
+        data.message && dictionary[data.message] ? console.error(dictionary[data.message].red, args[1].bold) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
+      }
+      else {
+        if (response.headers['set-cookie']) {
+          localStorage.getStorage().setItem('PHPSESSID', (response.headers['set-cookie'][response.headers['set-cookie'].length - 1]).split(';')[0]);
+        }
+         console.log(dictionary[data.message].green, args[1].bold);
+      }
+    }
+  },
+  "unregister": {
+    "description": dictionary.UNREGISTER_DESCRIPTION,
+    "url": "/user/unregister",
+    "request": {
+      "headers": {
+        "Content-Type": "application/json",
+        "Cookie": localStorage.getStorage().getItem('PHPSESSID')
+      }
+    },
+    "method": "del",
+    "usage": "note unregister",
+    "example": "note unregister",
+    "validation": {
+      "pattern": "^unregister$",
+      "errors": {
+      }
+    },
+    "confirm": dictionary.CONFIRM_UNREGISTER,
+    "callback": function (data) {
+      if (data.error !== 0) {
+         data.message && dictionary[data.message] ? console.error(dictionary[data.message].red) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
+      }
+      else {
+         console.log(dictionary[data.message].green, data.data.username.bold);
+      }
+    }
+  },
   "login": {
     "description": dictionary.LOGIN_DESCRIPTION,
     "url": "/user/login",
@@ -33,11 +95,11 @@ module.exports = {
     },
     "callback": function (data, response) {
       if (data.error !== 0) {
-        console.error(dictionary[data.message].red, args[1].bold);
+         data.message && dictionary[data.message] ? console.error(dictionary[data.message].red, args[1].bold) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
         if (response.headers['set-cookie']) {
-          console.log(dictionary[data.message].green, args[1].bold);
+           console.log(dictionary[data.message].green, args[1].bold);
           localStorage.getStorage().setItem('PHPSESSID', (response.headers['set-cookie'][response.headers['set-cookie'].length - 1]).split(';')[0]);
         }
         else {
@@ -64,51 +126,41 @@ module.exports = {
 
       }
     },
-    "callback": function (data, response) {
+    "callback": function (data) {
       if (data.error !== 0) {
-        console.error(dictionary[data.message].red);
+         data.message && dictionary[data.message] ? console.error(dictionary[data.message].red) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
         fs.unlink('./storage/PHPSESSID', function (err) {
           if (err) throw err;
 
-          console.log(dictionary[data.message].green);
+           console.log(dictionary[data.message].green);
         });
       }
     }
   },
-  "register": {
-    "description": dictionary.REGISTER_DESCRIPTION,
-    "url": "/user/register",
+  "me": {
+    "description": dictionary.GET_CURRENT_USERNAME,
+    "url": "/user/me",
     "request": {
-      "data": {
-        "username": args[1],
-        "password": args[2]
-      },
       "headers": {
         "Content-Type": "application/json",
         "Cookie": localStorage.getStorage().getItem('PHPSESSID')
       }
     },
-    "method": "post",
-    "usage": "note register USERNAME PASSWORD",
-    "example": "note register notejs qweASD123",
+    "method": "get",
+    "usage": "note me",
+    "example": "note me",
     "validation": {
-      "pattern": "^register (\\w{4,20}) ([.\\S]{4,20})$",
-      "errors": {
-        1: dictionary.USERNAME_VALIDATION,
-        2: dictionary.PASSWORD_VALIDATION
-      }
+      "pattern": "^me$",
+      "errors": { }
     },
-    "callback": function (data, response) {
+    "callback": function (data) {
       if (data.error !== 0) {
-        console.error(dictionary[data.message].red, args[1].bold);
+         data.message && dictionary[data.message] ? console.error(dictionary[data.message]) : console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
-        if (response.headers['set-cookie']) {
-          localStorage.getStorage().setItem('PHPSESSID', (response.headers['set-cookie'][response.headers['set-cookie'].length - 1]).split(';')[0]);
-        }
-        console.log(dictionary[data.message].green, args[1].bold);
+         console.log(dictionary[data.message].green, data.data.username.bold);
       }
     }
   },
@@ -125,13 +177,13 @@ module.exports = {
         2: dictionary.NOTE_VALIDATION
       }
     },
-    "callback": function (data, response) {
+    "callback": function (data) {
       if (data.error !== 0) {
         console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
         if (Array.isArray(data.data)) {
-          console.log('User %s has %d notes', args[1].bold, data.data.length);
+          console.log(dictionary.USER_HAS_X_NOTES, args[1].bold, data.data.length);
 
           // User's notes:
           data.data.forEach(function (item) {
@@ -167,12 +219,12 @@ module.exports = {
         2: dictionary.CONTENT_VALIDATION
       }
     },
-    "callback": function (data, response) {
+    "callback": function (data) {
       if (data.error !== 0) {
         console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
-        console.log(dictionary[data.message].green, args[1].bold);
+         console.log(dictionary[data.message].green, args[1].bold);
       }
     }
   },
@@ -198,12 +250,12 @@ module.exports = {
         2: dictionary.CONTENT_VALIDATION
       }
     },
-    "callback": function (data, response) {
+    "callback": function (data) {
       if (data.error !== 0) {
         console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
-        console.log(dictionary[data.message].green, args[1].bold);
+         console.log(dictionary[data.message].green, args[1].bold);
       }
     }
   },
@@ -225,12 +277,38 @@ module.exports = {
         1: dictionary.NOTE2_VALIDATION
       }
     },
-    "callback": function (data, response) {
+    "callback": function (data) {
       if (data.error !== 0) {
         console.error(dictionary.ERROR_OCCURRED.red, data.message);
       }
       else {
-        console.log(dictionary[data.message].green, args[1].bold);
+         console.log(dictionary[data.message].green, args[1].bold);
+      }
+    }
+  },
+  "delete-all": {
+    "description": dictionary.DELETE_ALL_DESCRIPTION,
+    "url": "/note",
+    "method": "del",
+    "request": {
+      "headers": {
+        "Content-Type": "application/json",
+        "Cookie": localStorage.getStorage().getItem('PHPSESSID')
+      }
+    },
+    "usage": "note delete-all",
+    "example": "note delete-all",
+    "validation": {
+      "pattern": "^delete-all$",
+      "errors": { }
+    },
+    "confirm": dictionary.CONFIRM_DELETE_ALL,
+    "callback": function (data) {
+      if (data.error !== 0) {
+        console.error(dictionary.ERROR_OCCURRED.red, data.message);
+      }
+      else {
+         console.log(dictionary[data.message].green);
       }
     }
   }

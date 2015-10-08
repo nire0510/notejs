@@ -1,6 +1,6 @@
 {
   "name": "notejs",
-  "version": "1.0.6",
+  "version": "1.0.10",
   "description": "Command line tool for note-taking & sharing",
   "main": "./bin/note.js",
   "preferGlobal": true,
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "colors": "^1.1.2",
+    "inquirer": "^0.10.1",
     "node-localstorage": "^0.6.0",
     "restler": "^3.4.0"
   },

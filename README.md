@@ -10,7 +10,7 @@ You short text snippets will be saved online so you can access them anywhere you
 ## How to use
 ### Placeholders
 * `USERNAME`: 4-20 alphanumeric characters (no spaces) - Your personal or your colleague's **note.js** username.
-* `PASSWORD`: 4-20 alphanumeric & special characters (no spaces) - Your **note.js** password.
+* `PASSWORD`: 4-20 characters (no spaces) - Your **note.js** password.
 * `NOTE`: 2-20 alphanumeric characters (no spaces) - Note's name, also serves as its unique ID.
 * `CONTENT`: 2-200 characters - Note's content.
 
@@ -34,11 +34,20 @@ You short text snippets will be saved online so you can access them anywhere you
 6. To delete an existing note:  
 `note delete NOTE`
 
-7. In any case your session expires, you have to login in order to be able to use all features:  
+7. If your repository is a mess and you want to delete all your notes:  
+`note delete-all`
+
+8. In any case your session expires, you have to login in order to be able to use all features:  
 `note login USERNAME PASSWORD`
 
-8. Working on a public computer? make sure you logout after finish working:  
+9. Forgot with which user you are logged in?  
+`note me`
+
+10. Working on a public computer? make sure you logout after finish working:  
 `note logout`
+
+11. When you think it's time to say goodbye, run this command to delete all your notes and username  
+`note unregister`
 
 ## Limitations
 * Currently, each user is allowed to create up to 100 notes (it may change in the near future)

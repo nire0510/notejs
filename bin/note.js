@@ -4,6 +4,7 @@
 
 var colors = require('colors');
 var rest = require('restler');
+var inquirer = require("inquirer");
 var commands = require('../app/commands');
 var config = require('../app/config');
 var dictionary = require('../app/dictionary');
@@ -42,8 +43,24 @@ else if (commands.hasOwnProperty(args[0])) {
   objCommand = commands[args[0]];
 
   if (args.join(' ').match(objCommand.validation.pattern)) {
-    rest[objCommand.method]([config.url.api, objCommand.url].join(''), objCommand.request)
-    .on('complete', objCommand.callback);
+    if (objCommand.hasOwnProperty('confirm')) {
+      inquirer.prompt({ type: 'confirm', message: objCommand.confirm, name: 'confirm' }, function(answers) {
+        if (answers.confirm) {
+          _sendRequest();
+        }
+        else {
+          console.warn(dictionary.CONFIRM_CANCEL);
+        }
+      });
+    }
+    else {
+      _sendRequest();
+    }
+
+    function _sendRequest () {
+      rest[objCommand.method]([config.url.api, objCommand.url].join(''), objCommand.request)
+        .on('complete', objCommand.callback);
+    }
   }
   else {
     console.error(dictionary.INVALID_COMMAND_PARAMETERS.red, args[0]);
