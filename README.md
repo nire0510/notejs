@@ -21,10 +21,10 @@ You short text snippets will be saved online so you can access them anywhere you
 2. Now you can add your first note:  
 `note add NOTE CONTENT`
 
-3. To see all your notes (or someone else's):  
+3. To see all notes of a user (use **me** as USERNAME to see yours):  
 `note get USERNAME`
 
-4. Alternatively, you can open specific note if you know its name:  
+4. Alternatively, you can open specific note if you know its name or even part of it:  
 `note get USERNAME NOTE`
 
 5. You can even email a note!  

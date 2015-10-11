@@ -86,7 +86,6 @@ module.exports = {
     "usage": "note login USERNAME PASSWORD",
     "example": "note login notejs qweASD123",
     "validation": {
-      //"pattern": "^login (\\w{4,20}) ([\\w\\.\\\\\+\\*\\?\\[\\^\\]\\$\\(\\)\\{\\}\\=\\!\\<\\>\\|\\:\\-@#%&_;'\"]{4,20})$",
       "pattern": "^login (\\w{4,20}) ([.\\S]{4,20})$",
       "errors": {
         1: dictionary.USERNAME_VALIDATION,
@@ -165,10 +164,16 @@ module.exports = {
     "description": dictionary.GET_DESCRIPTION,
     "url": "/note/" + args[1] + (args.length === 3 ? "/" + args[2] : ""),
     "method": "get",
+    "request": {
+      "headers": {
+        "Content-Type": "application/json",
+        "Cookie": localStorage.getStorage().getItem('PHPSESSID')
+      }
+    },
     "usage": "note get USERNAME [NOTE]",
     "example": "note get notejs -OR- note get notejs website",
     "validation": {
-      "pattern": "^get (\\w{4,20})(?:\\s+(\\w{2,20}))?$",
+      "pattern": "^get (\\w{4,20}|me)(?:\\s+([.\\S]{2,40}))?$",
       "errors": {
         1: dictionary.USERNAME_VALIDATION,
         2: dictionary.NOTE_VALIDATION
@@ -180,16 +185,16 @@ module.exports = {
       }
       else {
         if (Array.isArray(data.data)) {
-          console.log(dictionary.USER_HAS_X_NOTES, args[1].bold, data.data.length);
+          console.log(dictionary.USER_HAS_X_NOTES.green, data.data.length, args.slice(1).join(' ').bold);
 
           // User's notes:
           data.data.forEach(function (item) {
-            console.log('* %s%s%s', item.note.white.bold, '                         '.substr(item.note.length), item.content);
+            console.log('* %s%s%s', item.hasOwnProperty('private') && item.private === '\u0001' ? item.note.white.bold.underline : item.note.white.bold, '                              '.substr(item.note.length), item.content);
           });
         }
         else if (data.data && data.data.hasOwnProperty('note')) {
           // A note:
-          console.log('* %s\t%s', data.data.note.white.bold, data.data.content);
+          console.warn(dictionary.NO_NOTES_FOUND.yellow);
         }
       }
     }
@@ -207,9 +212,9 @@ module.exports = {
       }
     },
     "usage": "note email USERNAME NOTE EMAIL",
-    "example": "note email notejs notejs website myemail@somedomain.com",
+    "example": "note email notejs website myemail@somedomain.com",
     "validation": {
-      "pattern": "^email (\\w{4,20})\\s+(\\w{2,20})\\s+(\\S+@\\S+)$",
+      "pattern": "^email (\\w{4,20})\\s+([.\\S]{2,40})\\s+(\\S+@\\S+)$",
       "errors": {
         1: dictionary.USERNAME_VALIDATION,
         2: dictionary.NOTE_VALIDATION,
@@ -241,7 +246,7 @@ module.exports = {
     "usage": "note add NOTE CONTENT",
     "example": "note add sample this is a test",
     "validation": {
-      "pattern": "^add (\\w{2,20}) (.{2,200})$",
+      "pattern": "^add ([.\\S]{2,40}) (.{2,200})$",
       "errors": {
         1: dictionary.NOTE2_VALIDATION,
         2: dictionary.CONTENT_VALIDATION
@@ -272,7 +277,7 @@ module.exports = {
     "usage": "note add-private NOTE CONTENT",
     "example": "note add-private sample this is a test",
     "validation": {
-      "pattern": "^add-private (\\w{2,20}) (.{2,200})$",
+      "pattern": "^add-private ([.\\S]{2,40}) (.{2,200})$",
       "errors": {
         1: dictionary.NOTE2_VALIDATION,
         2: dictionary.CONTENT_VALIDATION
@@ -300,7 +305,7 @@ module.exports = {
     "usage": "note delete NOTE",
     "example": "note delete sample",
     "validation": {
-      "pattern": "^delete (\\w{2,20})$",
+      "pattern": "^delete ([.\\S]{2,40})$",
       "errors": {
         1: dictionary.NOTE2_VALIDATION
       }

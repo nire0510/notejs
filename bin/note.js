@@ -24,7 +24,7 @@ if (args.length === 0 || args[0] === 'help' || args[0] === '-h' || args[0] === '
 
   for (var command in commands) {
     if (commands.hasOwnProperty(command)) {
-      console.log('> %s - %s', command.white.bold, commands[command].description.white);
+      console.log('> %s - %s', command.bold.green, commands[command].description.white);
       console.log('  %s', commands[command].usage);
 
       if (commands[command].validation && commands[command].validation.errors) {

@@ -1,6 +1,6 @@
 {
   "name": "notejs",
-  "version": "1.0.12",
+  "version": "1.0.16",
   "description": "Command line tool for note-taking & sharing",
   "main": "./bin/note.js",
   "preferGlobal": true,
