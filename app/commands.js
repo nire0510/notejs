@@ -135,7 +135,7 @@ module.exports = {
       }
     }
   },
-  "me": {
+  "whoami": {
     "description": dictionary.GET_CURRENT_USERNAME,
     "url": "/user/me",
     "request": {
@@ -145,10 +145,10 @@ module.exports = {
       }
     },
     "method": "get",
-    "usage": "note me",
-    "example": "note me",
+    "usage": "note whoami",
+    "example": "note whoami",
     "validation": {
-      "pattern": "^me$",
+      "pattern": "^whoami",
       "errors": { }
     },
     "callback": function (data) {
@@ -173,7 +173,7 @@ module.exports = {
     "usage": "note get USERNAME [NOTE]",
     "example": "note get notejs -OR- note get notejs website",
     "validation": {
-      "pattern": "^get (\\w{4,20}|me)(?:\\s+([.\\S]{2,40}))?$",
+      "pattern": "^get (\\w{4,20}|my)(?:\\s+([.\\S]{2,40}))?$",
       "errors": {
         1: dictionary.USERNAME_VALIDATION,
         2: dictionary.NOTE_VALIDATION
@@ -223,15 +223,15 @@ module.exports = {
     },
     "callback": function (data) {
       if (data.error !== 0) {
-        data.message && dictionary[data.message] ? console.error(dictionary[data.message]) : console.error(dictionary.ERROR_OCCURRED.red, data.message, args[1], args[2], args[3]);
+        data.message && dictionary[data.message] ? console.error(dictionary[data.message], args[1], args[2], args[3]) : console.error(dictionary.ERROR_OCCURRED.red, data.message, args[1], args[2], args[3]);
       }
       else {
         console.log(dictionary.EMAIL_SUCCESS.green, args[2].bold, args[3].bold);
       }
     }
   },
-  "add": {
-    "description": dictionary.ADD_DESCRIPTION,
+  "post": {
+    "description": dictionary.POST_DESCRIPTION,
     "url": "/note/public/" + args[1],
     "method": "post",
     "request": {
@@ -243,10 +243,10 @@ module.exports = {
         "Cookie": localStorage.getStorage().getItem('PHPSESSID')
       }
     },
-    "usage": "note add NOTE CONTENT",
-    "example": "note add sample this is a test",
+    "usage": "note post NOTE CONTENT",
+    "example": "note post sample this is a test",
     "validation": {
-      "pattern": "^add ([.\\S]{2,40}) (.{2,200})$",
+      "pattern": "^post ([.\\S]{2,40}) (.{2,200})$",
       "errors": {
         1: dictionary.NOTE2_VALIDATION,
         2: dictionary.CONTENT_VALIDATION
@@ -261,8 +261,8 @@ module.exports = {
       }
     }
   },
-  "add-private": {
-    "description": dictionary.ADD_PRIVATE_DESCRIPTION,
+  "post-private": {
+    "description": dictionary.POST_PRIVATE_DESCRIPTION,
     "url": "/note/private/" + args[1],
     "method": "post",
     "request": {
@@ -274,10 +274,10 @@ module.exports = {
         "Cookie": localStorage.getStorage().getItem('PHPSESSID')
       }
     },
-    "usage": "note add-private NOTE CONTENT",
-    "example": "note add-private sample this is a test",
+    "usage": "note post-private NOTE CONTENT",
+    "example": "note post-private sample this is a test",
     "validation": {
-      "pattern": "^add-private ([.\\S]{2,40}) (.{2,200})$",
+      "pattern": "^post-private ([.\\S]{2,40}) (.{2,200})$",
       "errors": {
         1: dictionary.NOTE2_VALIDATION,
         2: dictionary.CONTENT_VALIDATION

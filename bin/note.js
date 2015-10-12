@@ -19,13 +19,13 @@ if (args.length === 0 || args[0] === 'help' || args[0] === '-h' || args[0] === '
   console.log('');
   console.log('npm install -g notejs'.green);
   console.log('');
-  console.log('%s %s', 'note.js'.bold.white, 'is a node.js based tool which helps you to take and share notes between your computers and even colleagues! You short text snippets are saved online so you can access them anywhere.'.white);
+  console.log('%s %s', 'note.js'.bold.white, 'is a node.js based tool which helps you to take and share notes between your computers and even with your colleagues, right from your terminal! You short text snippets will be saved online so you can access them anywhere you want.'.white);
   console.log('');
 
   for (var command in commands) {
     if (commands.hasOwnProperty(command)) {
       console.log('> %s - %s', command.bold.green, commands[command].description.white);
-      console.log('  %s', commands[command].usage);
+      console.log('  %s', commands[command].usage.green);
 
       if (commands[command].validation && commands[command].validation.errors) {
         for (var intIndex in commands[command].validation.errors) {

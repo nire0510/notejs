@@ -1,7 +1,7 @@
 # note.js
 **Command line tool for note-taking & sharing**  
 
-**note.js** is a node.js based tool which helps you to take and share notes between your computers and even colleagues right from your terminal! 
+**note.js** is a node.js based tool which helps you to take and share notes between your computers and even with your colleagues, right from your terminal!
 You short text snippets will be saved online so you can access them anywhere you want.
 
 ## Installation
@@ -18,10 +18,10 @@ You short text snippets will be saved online so you can access them anywhere you
 1. First you'll have to register in order to be able to use all features:  
 `note register USERNAME PASSWORD`
 
-2. Now you can add your first note:  
-`note add NOTE CONTENT`
+2. Now you can post your first note:  
+`note post NOTE CONTENT`
 
-3. To see all notes of a user (use **me** as USERNAME to see yours):  
+3. To see all notes of a user (use **my** as USERNAME to see yours):  
 `note get USERNAME`
 
 4. Alternatively, you can open specific note if you know its name or even part of it:  
@@ -32,7 +32,7 @@ You short text snippets will be saved online so you can access them anywhere you
 
 6. If you want to create a note which won't be seen when other users run the command in step #3, you can create 
  a somewhat "private" note, which will be seen only for users who know the note's name:  
-`note add-private NOTE CONTENT`
+`note post-private NOTE CONTENT`
 
 7. To delete an existing note:  
 `note delete NOTE`
@@ -44,7 +44,7 @@ You short text snippets will be saved online so you can access them anywhere you
 `note login USERNAME PASSWORD`
 
 10. Forgot with which user you are logged in?  
-`note me`
+`note whoami`
 
 11. Working on a public computer? make sure you logout after finish working:  
 `note logout`
